@@ -163,4 +163,60 @@ public class BitUtilTest {
         bitUtil.fromUInt3(bytes, -12345678, 0);
         assertEquals(-12345678 & 0x00FF_FFFF, bitUtil.toUInt3(bytes, 0));
     }
+
+    /**
+     * Test: testFromFloat_WrapperDelegatesCorrectly
+     *
+     * Intention :
+     * Vérifie que la méthode fromFloat(byte[], float) écrit correctement
+     * une valeur flottante dans le tableau d’octets, en utilisant un décalage = 0.
+     *
+     * Données de test :
+     * - Tableau d’octets de taille 4.
+     * - Valeur flottante 42.42f.
+     *
+     * Oracle :
+     * Après écriture, la lecture avec toFloat(bytes, 0) doit restituer la
+     * même valeur. Cela prouve que le wrapper appelle bien la version
+     * principale avec offset = 0.
+     */
+    @Test
+    public void testFromFloat_WrapperDelegatesCorrectly() {
+        byte[] bytes = new byte[4]; // float uses 4 bytes
+        float value = 42.42f;
+
+        BitUtil.LITTLE.fromFloat(bytes, value); // call wrapper
+
+        // Read back to check if written correctly
+        float result = BitUtil.LITTLE.toFloat(bytes, 0);
+        assertEquals(value, result, 0.000001f);
+    }
+
+    /**
+     * Test: testFromDouble_WrapperDelegatesCorrectly
+     *
+     * Intention :
+     * Vérifie que la méthode fromDouble(byte[], double) écrit correctement
+     * une valeur double dans le tableau d’octets, en utilisant un décalage = 0.
+     *
+     * Données de test :
+     * - Tableau d’octets de taille 8.
+     * - Valeur double 12345.6789.
+     *
+     * Oracle :
+     * Après écriture, la lecture avec toDouble(bytes, 0) doit restituer la
+     * même valeur. Cela prouve que le wrapper appelle bien la version
+     * principale avec offset = 0.
+     */
+    @Test
+    public void testFromDouble_WrapperDelegatesCorrectly() {
+        byte[] bytes = new byte[8]; // double uses 8 bytes
+        double value = 123456.789;
+
+        BitUtil.LITTLE.fromDouble(bytes, value); // call wrapper
+
+        // Read back to check if written correctly
+        double result = BitUtil.LITTLE.toDouble(bytes, 0);
+        assertEquals(value, result, 0.0000001d);
+    }
 }

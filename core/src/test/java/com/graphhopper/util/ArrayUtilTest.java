@@ -21,6 +21,8 @@ package com.graphhopper.util;
 import com.carrotsearch.hppc.IntArrayList;
 import org.junit.jupiter.api.Test;
 
+import com.github.javafaker.Faker;
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -178,4 +180,184 @@ class ArrayUtilTest {
         int[] b = {3, 7, 9, 10, 11, 12, 15, 20, 21, 26};
         assertEquals(from(2, 3, 6, 7, 8, 9, 10, 11, 12, 15, 20, 21, 26), from(ArrayUtil.merge(a, b)));
     }
+
+    /**
+     * Test: testSubList_NormalRange
+     *
+     * Intention :
+     * Vérifie que subList retourne correctement une sous-liste
+     * lorsqu’on lui fournit un intervalle valide (indices dans les bornes).
+     *
+     * Données de test :
+     * La liste d’entrée est [1,2,3,4,5] et les indices sont (1,4).
+     * On choisit cette liste car elle est simple et ordonnée,
+     * et l’intervalle permet d’extraire une sous-partie centrale.
+     *
+     * Oracle :
+     * Le résultat attendu est [2,3,4].
+     * Si la méthode retourne cette sous-liste, le test est réussi ;
+     * sinon, cela indique un problème d’indexation (off-by-one).
+     */
+    @Test
+    public void testSubList() {
+        IntArrayList list = from(1, 2, 3, 4, 5);
+        IntArrayList sub = ArrayUtil.subList(list, 1, 4);
+        assertEquals(from(2, 3, 4), sub);
+    }
+
+    /** 
+     * Test: testCalcSortOrder_InvalidLength
+     *
+     * Intention :
+     * Vérifie que calcSortOrder lance une IllegalArgumentException
+     * lorsque la longueur demandée ne correspond pas à la taille des tableaux.
+     *
+     * Données de test :
+     * - Cas 1 : arr1=[1,2,3], arr2=[4,5,6], length=4 → length trop grand.
+     * - Cas 2 : arr1=[1,2,3], arr2=[7,8], length=3 → arr2 trop court.
+     * On utilise de petits tableaux explicites pour rendre le test lisible.
+     *
+     * Oracle :
+     * Dans les deux cas, une IllegalArgumentException doit être levée,
+     * car la précondition sur la taille n’est pas respectée.
+     */
+    @Test
+    public void testCalcSortOrder_InvalidLength() {
+        int[] arr1 = {1, 2, 3};
+        int[] arr2 = {4, 5, 6};
+        // length is greater than arr1 and arr2 length
+        assertThrows(IllegalArgumentException.class, () -> {
+            ArrayUtil.calcSortOrder(arr1, arr2, 4);
+        });
+        // arr2 is shorter than length
+        int[] arr2Short = {7, 8};
+        assertThrows(IllegalArgumentException.class, () -> {
+            ArrayUtil.calcSortOrder(arr1, arr2Short, 3);
+        });
+    }
+
+    /**
+     * Test: testApplyOrder_InvalidOrderLength_ThrowsException
+     *
+     * Intention :
+     * Vérifie que applyOrder(int[], int[]) rejette un ordre dont la longueur
+     * est supérieure à celle du tableau source.
+     *
+     * Données de test :
+     * arr = [10,20,30] (longueur 3),
+     * order = [2,1,0,3] (longueur 4).
+     * Le mismatch volontaire de taille provoque une erreur.
+     *
+     * Oracle :
+     * Une IllegalArgumentException doit être levée.
+     * Cela valide que la méthode vérifie la cohérence de la longueur de order.
+     */
+    @Test
+    public void testApplyOrder_InvalidOrderLength() {
+        int[] arr = {10, 20, 30};
+        int[] order = {2, 1, 0, 3}; // order.length > arr.length
+        assertThrows(IllegalArgumentException.class, () -> {
+            ArrayUtil.applyOrder(arr, order);
+        });
+    }
+
+    /**
+     * Test: testZero
+     * 
+     * Intention :
+     * Vérifie que la méthode zero(int) génère correctement un tableau
+     * rempli de zéros de la taille spécifiée.
+     * 
+     * Données de test :
+     * Trois cas sont testés : taille 0, taille 1 et taille 5.
+     * Ces cas couvrent les scénarios de base, y compris le cas limite
+     * de taille zéro.
+     * 
+     * Oracle :
+     * Pour chaque cas, on compare le tableau généré avec le tableau
+     * attendu rempli de zéros. Si les tableaux correspondent,
+     * le test est réussi, sinon il échoue.
+     */
+    @Test
+    public void testZero(){
+
+        assertEquals(ArrayUtil.zero(0), from());
+        assertEquals(ArrayUtil.zero(1), from(0));
+        assertEquals(ArrayUtil.zero(5), from(0,0,0,0,0));
+        
+    }
+
+    /**
+     * Test: testRemoveConsecutiveDuplicatesErrors
+     * 
+     * Intention :
+     * Vérifie que removeConsecutiveDuplicates(int[], int) lance une exception
+     * lorsque la longueur fournie est invalide (négative ou supérieure à la taille
+     * du tableau).
+     * 
+     * Données de test :
+     * Un tableau d’entiers avec des doublons consécutifs est utilisé.
+     * Les longueurs testées sont -1 (négative) et arr.length + 1 (trop grande).
+     * 
+     * Oracle :
+     * Une IllegalArgumentException doit être levée pour la longueur négative,
+     * et une ArrayIndexOutOfBoundsException pour la longueur trop grande.
+     * Cela confirme que la méthode valide correctement la longueur d’entrée.
+     */
+    @Test
+    public void testRemoveConsecutiveDuplicatesErrors () {
+        int[] arr = new int[]{3, 3, 4, 2, 1, -3, -3, 9, 3, 6, 6, 7, 7};
+        assertThrows(IllegalArgumentException.class, () -> ArrayUtil.removeConsecutiveDuplicates(arr, -1));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> ArrayUtil.removeConsecutiveDuplicates(arr, arr.length + 1));
+    }
+
+    /**
+     * Test: testCalcSortOrder_IntArrayList_UnequalSize_ThrowsException_Faker
+     *
+     * Intention :
+     * Vérifie que calcSortOrder(IntArrayList, IntArrayList) rejette deux listes
+     * de tailles différentes en lançant une IllegalArgumentException a l'aide de JavaFaker.
+     * 
+     * L'utilisation de JavaFaker est justifiée ici afin de générer dynamiquement
+     * des entiers aléatoires dans des listes d'entrée. Cela permet 
+     * d'éviter de hardcoder des valeurs arbitraires et de couvrir un éventail
+     * plus large de scénarios possibles en creeant deux listes contenant des entiers aleatoires. 
+     *
+     * Données de test :
+     * Les tailles des deux listes sont générées aléatoirement avec Faker
+     * dans une plage 3–10, en s’assurant qu’elles sont inégales.
+     * Les contenus sont remplis de valeurs aléatoires (1–100),
+     * mais le contenu importe peu, seule la différence de taille compte.
+     *
+     * Oracle :
+     * Une IllegalArgumentException doit être levée car les deux listes
+     * n’ont pas la même taille. Le test est déterministe sur le résultat attendu,
+     * même si les valeurs varient.
+     */
+    @Test
+    void testCalcSortOrder_IntArrayList_UnequalSize_ThrowsException_Faker() {
+        Faker faker = new Faker();
+
+        // Generate random sizes for the lists (ensuring they are unequal)
+        int size1 = faker.number().numberBetween(3, 10);
+        int size2;
+        do {
+            size2 = faker.number().numberBetween(1, 10);
+        } while (size2 == size1); // ensure sizes are unequal
+
+        // Fill the lists with random integers (1–100)
+        IntArrayList arr1 = new IntArrayList();
+        IntArrayList arr2 = new IntArrayList();
+
+        for (int i = 0; i < size1; i++) arr1.add(faker.number().numberBetween(1, 100));
+        for (int i = 0; i < size2; i++) arr2.add(faker.number().numberBetween(1, 100));
+
+        // The test should still throw IllegalArgumentException
+        assertThrows(IllegalArgumentException.class, () -> {
+            ArrayUtil.calcSortOrder(arr1, arr2);
+        });
+    }
+
+    
+
 }
