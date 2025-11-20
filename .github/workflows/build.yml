@@ -36,3 +36,6 @@ jobs:
             ${{ runner.os}}-node_modules-
       - name: Build ${{ matrix.java-version }}
         run: mvn -B clean test
+      - name: Oops... quelque chose est sus...
+        if: failure()
+        uses: ./.github/actions/amongus
