@@ -38,7 +38,7 @@ runs:
         echo "IS THIS???????"
         echo ""
         echo "wait chatgpt 67 says he can display the source of the error visually..."
-        chafa 14-rickroll.jpg --size 96x72
+        chafa 14-rickroll.jpg --size 60x40 --format symbols
         echo ""
         echo "ur error was so sus that u got rickrolled lol"
         exit 1
