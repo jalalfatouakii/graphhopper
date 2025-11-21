@@ -34,10 +34,11 @@ runs:
         echo "⠀⠀⠀⠀⠀⠀⠀⢿⣿⣦⣄⣀⣠⣴⣿⣿⠁⠀⠈⠻⣿⣿⣿⣿⡿⠏⠀⠀⠀⠀"
         echo "⠀⠀⠀⠀⠀⠀⠀⠈⠛⠻⠿⠿⠿⠿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
         echo ""
-        echo "WHAT??????"
-        echo "IS THIS"
+        echo "WHAT"
+        echo "IS THIS???????"
         echo ""
-        chafa 14-rickroll.jpg --size 480x360
+        echo "wait chatgpt 67 says he can display the source of the error visually..."
+        chafa 14-rickroll.jpg --size 96x72
         echo ""
         echo "ur error was so sus that u got rickrolled lol"
         exit 1
