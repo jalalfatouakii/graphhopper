@@ -52,7 +52,7 @@ runs:
         sleep 2
         echo "wait chatgpt 6.7 says he can display the source of the error visually..."
         echo ""
-        chafa 14-rickroll.jpg --size 20x10 --format symbols --color-space rgb
+        chafa 14-rickroll.jpg --size 20x10 --format symbols --color-space rgb 2>/dev/null | cat
         echo ""
         sleep 2
         echo "ChatGPT 6.7 analysis complete. The build failed because it was too sus. Please eliminate all sus files and try again."
