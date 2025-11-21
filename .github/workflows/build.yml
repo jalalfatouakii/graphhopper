@@ -41,6 +41,3 @@ jobs:
       - name: Oops... quelque chose est sus...
         if: steps.build.outcome == 'failure'
         uses: ./.github/actions/amongus
-      - name: Fail if build failed
-        if: steps.build.outcome == 'failure'
-        run: exit 1
