@@ -6,7 +6,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        java-version: [24, 25-ea]
+        java-version: [ 24, 25-ea ]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -35,9 +35,53 @@ jobs:
           restore-keys: |
             ${{ runner.os}}-node_modules-
       - name: Build ${{ matrix.java-version }}
-        id: build
-        continue-on-error: true
-        run: mvn -B clean test
-      - name: "Ultra serious analysis of the build failure"
-        if: steps.build.outcome == 'failure'
-        uses: ./.github/actions/analysis
+        run: mvn -B clean install
+
+
+      # ---- PIT Mutation Testing ----
+      - name: Run PIT mutation testing and compare
+        run: |
+          cd core
+          mvn test-compile org.pitest:pitest-maven:mutationCoverage
+          SCORE=$(grep -oP '\d+%' target/pit-reports/index.html | sed -n '2p' | tr -d '%')
+          echo "CURRENT_SCORE=$SCORE"
+
+          if [ -f last_mutation_score.txt ]; then
+            PREV_SCORE=$(cat last_mutation_score.txt)
+          else
+            PREV_SCORE=0
+          fi
+
+          echo "Previous score: $PREV_SCORE"
+          echo "Current score:  $SCORE"
+          if (( SCORE < PREV_SCORE )); then
+            echo "❌ Mutation score decreased ($CURRENT_SCORE < $PREV_SCORE)"
+            exit 1
+          fi
+          echo "$SCORE" > last_mutation_score.txt
+
+
+      - name: Commit and push updated mutation score
+        if: matrix.java-version == '24'
+        run: |
+          ls
+          echo "____________"
+          cd core
+          ls
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add last_mutation_score.txt
+          git commit -m "Update last mutation score to SCORE" || echo "No changes to commit"
+          git push origin HEAD:${GITHUB_REF##*/}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      
+
+
+  
+        
+
+      
+
+      
