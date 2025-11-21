@@ -7,7 +7,7 @@ runs:
       shell: bash
       run: |
         echo "an error is sus..."
-        echo "generating the analysis report using gpt 67"
+        echo "generating the analysis report using gpt 6.7"
         sudo apt-get update -qq && sudo apt-get install -y chafa
         echo "generating error output..."
         echo "wait what is this???"
@@ -37,8 +37,8 @@ runs:
         echo "WHAT"
         echo "IS THIS???????"
         echo ""
-        echo "wait chatgpt 67 says he can display the source of the error visually..."
-        chafa 14-rickroll.jpg --size 60x40 --format symbols
+        echo "wait chatgpt 6.7 says he can display the source of the error visually..."
+        chafa 14-rickroll.jpg --size 20x10 --format symbols
         echo ""
         echo "ur error was so sus that u got rickrolled lol"
         exit 1
