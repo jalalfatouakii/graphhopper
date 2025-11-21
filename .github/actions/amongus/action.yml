@@ -3,12 +3,21 @@ description: "mwehehehehe"
 runs:
   using: "composite"
   steps:
+    - name: Cache chafa
+      uses: actions/cache@v4
+      id: chafa-cache
+      with:
+        path: /usr/bin/chafa
+        key: chafa-${{ runner.os }}
+    - name: Install chafa
+      if: steps.chafa-cache.outputs.cache-hit != 'true'
+      shell: bash
+      run: sudo apt-get update -qq && sudo apt-get install -y chafa
     - name: When the error is sus
       shell: bash
       run: |
         echo "an error is sus..."
         echo "generating the analysis report using gpt 6.7"
-        sudo apt-get update -qq && sudo apt-get install -y chafa
         echo "generating error output..."
         echo "wait what is this???"
         echo "the error was so bad u broke the build..."
