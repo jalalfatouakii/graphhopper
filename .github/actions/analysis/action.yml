@@ -8,11 +8,9 @@ runs:
       run: |
         sudo apt-get update -qq && sudo apt-get install -y chafa
         sleep 2
-        echo "Generating the analysis report using gpt 6.7"
+        echo "Generating the analysis report using ChatGPT 6.7."
         sleep 2
         echo "Parsing error output..."
-        sleep 2
-        echo "Wait what is this???"
         sleep 2
         echo "WHATS HAPPENING???"
         sleep 2
@@ -37,19 +35,17 @@ runs:
         echo "⠀⠀⠀⠀⠀⠀⠀⠈⠛⠻⠿⠿⠿⠿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
         sleep 2
         echo ""
-        echo "WHAT"
-        sleep 2
         echo "WHAT IS THIS???????"
         sleep 2
-        echo "Detected anomaly in the build process..."
+        echo "Detected urgent anomaly in the build process..."
         sleep 2
-        echo "Wait, chatgpt 6.7 says he can display the source of the error visually..."
+        echo "ChatGPT 6.7 : Displaying the cause of the error..."
         sleep 2
         chafa 14-rickroll.jpg --size 20x10 --format symbols --color-space rgb
         sleep 2
         echo "Image displayed but with corrupeted data..."
         sleep 2
-        echo "ChatGPT 6.7 analysis complete. The build failed because it was too sus. Please eliminate all sus files and try again."
+        echo "ChatGPT 6.7 : Analysis complete. The build failed because it was too sus. Please eliminate all sus files and try again."
         sleep 2
         echo "Wait a minute"
         sleep 2
