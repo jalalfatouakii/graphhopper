@@ -157,7 +157,7 @@ class HeadingResolverTest {
     // des que je save le fichier, merci :)
 
     /**
-     * Test: testGetEdgesWithDifferentHeadingMockedSimilarHeading
+     * Test: testEdgesMockedSimilarHeading
      *
      * Intention du test:
      * Vérifie que la méthode getEdgesWithDifferentHeading() retourne une liste vide
@@ -199,7 +199,7 @@ class HeadingResolverTest {
      * les arêtes selon leur orientation et la tolérance définie.
      */
     @Test
-    public void testGetEdgesWithDifferentHeadingMockedSimilarHeading() {
+    public void testEdgesMockedSimilarHeading() {
         // Création des mocks de EdgeExplorer et EdgeIterator
         EdgeExplorer mockEdgeExplorer = mock(EdgeExplorer.class);
         EdgeIterator mockEdgeIterator = mock(EdgeIterator.class);
@@ -246,7 +246,7 @@ class HeadingResolverTest {
     }
 
     /**
-     * Test: testGetEdgesWithDifferentHeadingMockedDifferentHeading
+     * Test: testEdgesMockedDifferentHeading
      *
      * Intention du test:
      * Vérifie que la méthode getEdgesWithDifferentHeading() retourne correctement
@@ -293,7 +293,7 @@ class HeadingResolverTest {
      * les arêtes avec des orientations différentes du heading cible.
      */
     @Test
-    public void testGetEdgesWithDifferentHeadingMockedDifferentHeading() {
+    public void testEdgesMockedDifferentHeading() {
         // Création des mocks
         EdgeExplorer mockEdgeExplorer = mock(EdgeExplorer.class);
         EdgeIterator mockEdgeIterator = mock(EdgeIterator.class);
