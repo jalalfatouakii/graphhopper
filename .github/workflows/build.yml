@@ -38,6 +38,6 @@ jobs:
         id: build
         continue-on-error: true
         run: mvn -B clean test
-      - name: Oops... quelque chose est sus...
+      - name: "Ultra serious analysis of the build failure"
         if: steps.build.outcome == 'failure'
         uses: ./.github/actions/amongus

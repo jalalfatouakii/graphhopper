@@ -7,8 +7,13 @@ runs:
       shell: bash
       run: |
         echo "an error is sus..."
+        echo "generating the analysis report using gpt 67"
         sudo apt-get update -qq && sudo apt-get install -y chafa
         echo "generating error output..."
+        echo "wait what is this???"
+        echo "the error was so bad u broke the build..."
+        echo "WHATS HAPPENING???"
+        sleep 2
         echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣤⣤⣤⣤⣶⣦⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀"
         echo "⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⡿⠛⠉⠙⠛⠛⠛⠛⠻⢿⣿⣷⣤⡀⠀⠀⠀⠀⠀"
         echo "⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⠋⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⠈⢻⣿⣿⡄⠀⠀⠀⠀"
@@ -29,9 +34,10 @@ runs:
         echo "⠀⠀⠀⠀⠀⠀⠀⢿⣿⣦⣄⣀⣠⣴⣿⣿⠁⠀⠈⠻⣿⣿⣿⣿⡿⠏⠀⠀⠀⠀"
         echo "⠀⠀⠀⠀⠀⠀⠀⠈⠛⠻⠿⠿⠿⠿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
         echo ""
-        echo "Displaying the cause of the error..."
+        echo "WHAT??????"
+        echo "IS THIS"
         echo ""
-        chafa 14-rickroll.jpg --size 80x40
+        chafa 14-rickroll.jpg --size 480x360
         echo ""
-        echo "BUILD FAILED - GET BETTER"
+        echo "ur error was so sus that u got rickrolled lol"
         exit 1
