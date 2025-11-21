@@ -40,4 +40,4 @@ jobs:
         run: mvn -B clean test
       - name: "Ultra serious analysis of the build failure"
         if: steps.build.outcome == 'failure'
-        uses: ./.github/actions/amongus
+        uses: ./.github/actions/analysis

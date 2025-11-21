@@ -35,18 +35,17 @@ runs:
         echo "⠀⠀⠀⠀⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀⣿⣿⡇⠀⢹⣿⡆⠀⠀⠀⣸⣿⠇⠀⠀⠀"
         echo "⠀⠀⠀⠀⠀⠀⠀⢿⣿⣦⣄⣀⣠⣴⣿⣿⠁⠀⠈⠻⣿⣿⣿⣿⡿⠏⠀⠀⠀⠀"
         echo "⠀⠀⠀⠀⠀⠀⠀⠈⠛⠻⠿⠿⠿⠿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
+        sleep 2
         echo ""
         echo "WHAT"
         sleep 2
         echo "WHAT IS THIS???????"
         sleep 2
         echo "Detected anomaly in the build process..."
-        echo ""
         sleep 2
         echo "Wait, chatgpt 6.7 says he can display the source of the error visually..."
-        echo ""
+        sleep 2
         chafa 14-rickroll.jpg --size 20x10 --format symbols --color-space rgb
-        echo ""
         sleep 2
         echo "Image displayed but with corrupeted data..."
         sleep 2
@@ -54,7 +53,7 @@ runs:
         sleep 2
         echo "Wait a minute"
         sleep 2
-        echp "Do you recognize the person in the image???"
+        echo "Do you recognize the person in the image???"
         sleep 2
         echo "If you do, please read the documentation here : https://r.mtdv.me/articles/help-with-gpt-67"
         exit 1
