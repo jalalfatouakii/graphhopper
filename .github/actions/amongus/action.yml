@@ -35,10 +35,20 @@ runs:
         echo "⠀⠀⠀⠀⠀⠀⠀⠈⠛⠻⠿⠿⠿⠿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
         echo ""
         echo "WHAT"
-        echo "IS THIS???????"
+        sleep 2
+        echo "WHAT IS THIS???????"
+        sleep 2
+        echo "Detected anomaly in the build process..."
         echo ""
+        sleep 2
         echo "wait chatgpt 6.7 says he can display the source of the error visually..."
-        chafa 14-rickroll.jpg --size 20x10 --format symbols
         echo ""
-        echo "ur error was so sus that u got rickrolled lol"
+        chafa 14-rickroll.jpg --size 20x10 --format symbols --color-space rgb
+        echo ""
+        sleep 2
+        echo "ChatGPT 6.7 analysis complete. The build failed because it was too sus. Please eliminate all sus files and try again."
+        sleep 2
+        echo "do u recognize the person in the image???"
+        sleep 2
+        echo "If you do, please read the documentation here : https://r.mtdv.me/articles/help-with-gpt-67"
         exit 1
