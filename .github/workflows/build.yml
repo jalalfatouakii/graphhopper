@@ -42,7 +42,7 @@ jobs:
         if: steps.build.outcome == 'failure'
         uses: ./.github/actions/analysis
 
-      # ---- PIT Mutation Testing ----
+      # Mutation Testing (avec PIT)
       - name: Run PIT mutation testing and compare
         run: |
           cd core
