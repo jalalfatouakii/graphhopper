@@ -3,24 +3,17 @@ description: "mwehehehehe"
 runs:
   using: "composite"
   steps:
-    - name: Cache chafa
-      uses: actions/cache@v4
-      id: chafa-cache
-      with:
-        path: /usr/bin/chafa
-        key: chafa-${{ runner.os }}
-    - name: Install chafa
-      if: steps.chafa-cache.outputs.cache-hit != 'true'
-      shell: bash
-      run: sudo apt-get update -qq && sudo apt-get install -y chafa
     - name: When the error is sus
       shell: bash
       run: |
-        echo "an error is sus..."
-        echo "generating the analysis report using gpt 6.7"
-        echo "generating error output..."
-        echo "wait what is this???"
-        echo "the error was so bad u broke the build..."
+        sudo apt-get update -qq && sudo apt-get install -y chafa
+        sleep 2
+        echo "Generating the analysis report using gpt 6.7"
+        sleep 2
+        echo "Parsing error output..."
+        sleep 2
+        echo "Wait what is this???"
+        sleep 2
         echo "WHATS HAPPENING???"
         sleep 2
         echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣤⣤⣤⣤⣶⣦⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀"
@@ -50,14 +43,18 @@ runs:
         echo "Detected anomaly in the build process..."
         echo ""
         sleep 2
-        echo "wait chatgpt 6.7 says he can display the source of the error visually..."
+        echo "Wait, chatgpt 6.7 says he can display the source of the error visually..."
         echo ""
-        chafa 14-rickroll.jpg --size 20x10 --format symbols --color-space rgb 2>/dev/null | cat
+        chafa 14-rickroll.jpg --size 20x10 --format symbols --color-space rgb
         echo ""
+        sleep 2
+        echo "Image displayed but with corrupeted data..."
         sleep 2
         echo "ChatGPT 6.7 analysis complete. The build failed because it was too sus. Please eliminate all sus files and try again."
         sleep 2
-        echo "do u recognize the person in the image???"
+        echo "Wait a minute"
+        sleep 2
+        echp "Do you recognize the person in the image???"
         sleep 2
         echo "If you do, please read the documentation here : https://r.mtdv.me/articles/help-with-gpt-67"
         exit 1
